@@ -1,0 +1,65 @@
+#!/bin/sh
+#
+# afbinit	firmware loader for Elite 3D cards
+#
+# chkconfig:	2345 90 10
+#
+# description:	Load microcode at boottime to all detected Elite3D
+#		graphics cards.
+#
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+UCODE=/lib/firmware/afb.ucode
+LOADER=/usr/sbin/afbinit
+
+ARCH=$(uname -m)
+# If this is not sparc64, get out of here.
+if [ "$ARCH" != "sparc64" ]; then
+        echo "$ARCH cannot have AFB"
+        return 1
+fi
+	
+# The microcode loader binary and the microcode
+# itself must exist.
+if [ ! -x $LOADER ]; then
+	echo "Missing afbinit"
+	return 1
+fi
+	
+if [ ! -f $UCODE ]; then
+	echo "Missing microcode"
+	return 1
+fi
+	
+# Make FB device list.
+afb_devs=$(awk '/Elite/ {printf "fb%d\n",$1}' /proc/fb)	
+if [ -z "$afb_devs" ]; then
+	echo "No AFB detected"
+	return 1
+fi
+
+start()
+{
+	# Load microcode onto each card.
+	for afb in $afb_devs; do
+		show "Starting afbinit for $afb device "
+		busy
+		$LOADER /dev/$afb $UCODE > /dev/null
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && ok || fail
+	done
+}
+
+case "$1" in
+	start|restart|reload)
+		start
+		;;
+	stop)
+		;;
+	*)
+		msg_usage "$0 {start|stop|restart|reload}"
+		exit 3
+		;;
+esac
