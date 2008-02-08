@@ -17,17 +17,11 @@ LOADER=/usr/sbin/afbinit
 ARCH=$(uname -m)
 # If this is not sparc64, get out of here.
 if [ "$ARCH" != "sparc64" ]; then
-        echo "$ARCH cannot have AFB"
-        return 1
-fi
-	
-# The microcode loader binary and the microcode
-# itself must exist.
-if [ ! -x $LOADER ]; then
-	echo "Missing afbinit"
+	echo "$ARCH cannot have AFB"
 	return 1
 fi
 	
+# The microcode must exist.
 if [ ! -f $UCODE ]; then
 	echo "Missing microcode"
 	return 1
@@ -52,14 +46,19 @@ start()
 	done
 }
 
+RETVAL=0
 case "$1" in
-	start|restart|reload)
+	start|restart|try-restart|reload|force-reload)
 		start
 		;;
 	stop)
 		;;
+	status)
+		echo "AFB devices present: $afb_devs"
+		;;
 	*)
-		msg_usage "$0 {start|stop|restart|reload}"
+		msg_usage "$0 {start|stop|restart|try-restart|reload|force-reload}"
 		exit 3
 		;;
 esac
+exit $RETVAL
