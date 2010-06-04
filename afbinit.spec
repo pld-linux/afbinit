@@ -5,9 +5,9 @@ Version:	1.0.3
 Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://ftp.pl.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0.orig.tar.gz
+Source0:	ftp://ftp.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0.orig.tar.gz
 # Source0-md5:	c126b3ebb72e5028fd5d35fb6128316f
-Source1:	http://ftp.pl.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0-3.diff.gz
+Source1:	ftp://ftp.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0-3.diff.gz
 # Source1-md5:	45dfdb91b3e259a06bc864ffb340580f
 Source2:	%{name}.init
 BuildRequires:	rpmbuild(macros) >= 1.228
@@ -28,8 +28,8 @@ or Sun website) and place it into /lib/firmware/afb.ucode file.
 afbinit wczytuje mikrokod do akceleratorów graficznych Sun
 Microsystems AFB Graphics Accellerator, znanych także pod nazwą Sun
 Microsystems Elite 3D, spotykanych w wielu systemach UltraSPARC.
-Mikrokod ten jest niezbędny do uruchamiania na tych kartach X11 z
-w akceleracją grafiki.
+Mikrokod ten jest niezbędny do uruchamiania na tych kartach X11 z w
+akceleracją grafiki.
 
 Uwaga: ten program wymaga zdobycia własnościowego mikrokodu Suna (np.
 z Solarisa lub strony WWW Suna) i umieszczenia go w pliku
