@@ -5,9 +5,9 @@ Version:	1.0.3
 Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	ftp://ftp.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0.orig.tar.gz
+Source0:	http://ftp.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0.orig.tar.gz
 # Source0-md5:	c126b3ebb72e5028fd5d35fb6128316f
-Source1:	ftp://ftp.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0-3.diff.gz
+Source1:	http://ftp.debian.org/debian/pool/contrib/a/afbinit/%{name}_1.0-3.diff.gz
 # Source1-md5:	45dfdb91b3e259a06bc864ffb340580f
 Source2:	%{name}.init
 BuildRequires:	rpmbuild(macros) >= 1.228
